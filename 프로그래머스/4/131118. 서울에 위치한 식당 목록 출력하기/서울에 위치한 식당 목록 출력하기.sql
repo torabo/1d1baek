@@ -1,0 +1,11 @@
+SELECT info.REST_ID 
+     , info.REST_NAME
+     , info.FOOD_TYPE
+     , info.FAVORITES
+     , info.ADDRESS
+     , ROUND(AVG(rev.REVIEW_SCORE),2) as SCORE
+FROM REST_INFO info
+    INNER JOIN REST_REVIEW as rev ON info.REST_ID = rev.REST_ID
+WHERE LEFT(info.ADDRESS,2) = '서울'
+GROUP BY info.REST_ID
+ORDER BY SCORE DESC , info.FAVORITES DESC
